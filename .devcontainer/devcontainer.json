@@ -1,0 +1,15 @@
+{
+  "name": "go-intermediate",
+  "image": "mcr.microsoft.com/devcontainers/go:2-1.25-bookworm",
+  "forwardPorts": [8080],
+  "postCreateCommand": "go version",
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.Go"],
+      "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true
+      }
+    }
+  }
+}

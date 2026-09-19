@@ -6,6 +6,16 @@ Go でブログ API を実装しながら、HTTP サーバーから認証まで�
 
 公式のサンプルコードは [saki-engineering/go-intermediate](https://github.com/saki-engineering/go-intermediate/) です。このリポジトリは自分の手で実装するためのものです。
 
+## 開発環境
+
+[Dev Containers](https://containers.dev/) を使います。Go 1.25 はコンテナ内に入っており、Mac に Go を入れる必要はありません。
+
+1. Docker Desktop を起動する
+2. Cursor でこのリポジトリを開く
+3. 「Reopen in Container」を選ぶ
+
+コンテナ内のターミナルで `go version` が動けば準備完了です。HTTP サーバーはコンテナの 8080 番をホストへ転送します。
+
 ## 作るもの
 
 ブログサービスのバックエンド API です。次の 5 機能を実装します。
