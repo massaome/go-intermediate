@@ -29,7 +29,7 @@ Go 用のコンテナと MySQL のコンテナが同時に起動します。接�
 
 ローカル開発専用のパスワードなので、そのままリポジトリに入れてあります。
 
-テーブルは [myapi/db/createTable.sql](myapi/db/createTable.sql) をもとに、MySQL の初回起動時に自動で作られます。定義を変えて作り直す場合は、ボリュームごと消して起動し直します。
+テーブルは [myapi/db/createTable.sql](myapi/db/createTable.sql)、動作確認用のデータは [myapi/db/insertData.sql](myapi/db/insertData.sql) をもとに、MySQL の初回起動時に自動で流し込まれます。定義やデータを変えて作り直す場合は、ボリュームごと消して起動し直します。
 
 ```bash
 docker compose -f .devcontainer/docker-compose.yml down -v

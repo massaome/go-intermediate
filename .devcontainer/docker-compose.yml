@@ -30,8 +30,10 @@ services:
       - "3306:3306"
     volumes:
       - db-volume:/var/lib/mysql
-      # 初回起動時にテーブルを作る
-      - ../myapi/db/createTable.sql:/docker-entrypoint-initdb.d/createTable.sql:ro
+      # 初回起動時にテーブルを作り、動作確認用のデータを入れる
+      # docker-entrypoint-initdb.d の中はファイル名順に実行される
+      - ../myapi/db/createTable.sql:/docker-entrypoint-initdb.d/01_createTable.sql:ro
+      - ../myapi/db/insertData.sql:/docker-entrypoint-initdb.d/02_insertData.sql:ro
     healthcheck:
       test:
         - CMD-SHELL
