@@ -1,8 +1,10 @@
 {
   "name": "go-intermediate",
-  "image": "mcr.microsoft.com/devcontainers/go:2-1.25-bookworm",
-  "forwardPorts": [8080],
-  "postCreateCommand": "go version",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/go-intermediate",
+  "forwardPorts": [8080, 3306],
+  "postCreateCommand": "go version && sudo apt-get update && sudo apt-get install -y default-mysql-client",
   "customizations": {
     "vscode": {
       "extensions": ["golang.Go"],

@@ -1,0 +1,45 @@
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/go:2-1.25-bookworm
+    volumes:
+      - ..:/workspaces/go-intermediate:cached
+    command: sleep infinity
+    environment:
+      # Go のコードからはサービス名 db で MySQL に接続する
+      MYSQL_HOST: db
+      MYSQL_PORT: "3306"
+      MYSQL_USER: gouser
+      MYSQL_PASSWORD: gopassword
+      MYSQL_DATABASE: sampledb
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: gouser
+      MYSQL_PASSWORD: gopassword
+      TZ: Asia/Tokyo
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
+      # 初回起動時にテーブルを作る
+      - ../myapi/db/createTable.sql:/docker-entrypoint-initdb.d/createTable.sql:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mysqladmin ping -h 127.0.0.1 -u root -p"$$MYSQL_ROOT_PASSWORD" --silent
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  db-volume:
