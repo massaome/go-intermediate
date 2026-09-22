@@ -26,7 +26,7 @@ func main() {
 	}
 	defer db.Close()
 
-	articleID := 1000
+	articleID := 1
 	const sqlStr = `
 		select *
 		from articles
