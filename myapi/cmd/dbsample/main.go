@@ -39,7 +39,13 @@ func main() {
 	articleArray := make([]models.Article, 0)
 	for rows.Next() {
 		var article models.Article
-		err := rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum)
+		var createdTime sql.NullTime
+		err := rows.Scan(&article.ID, &article.Title, &article.Contents, &article.UserName, &article.NiceNum, &createdTime)
+
+		if createdTime.Valid {
+			article.CreatedAt = createdTime.Time
+		}
+
 		if err != nil {
 			fmt.Println(err)
 		} else {
