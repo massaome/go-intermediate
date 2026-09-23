@@ -9,9 +9,9 @@ import (
 )
 
 var (
-	dbUser     = os.Getenv("DB_USER")
-	dbPassword = os.Getenv("DB_PASSWORD")
-	dbDatabase = os.Getenv("DB_DATABASE")
+	dbUser     = os.Getenv("MYSQL_USER")
+	dbPassword = os.Getenv("MYSQL_PASSWORD")
+	dbDatabase = os.Getenv("MYSQL_DATABASE")
 	dbConn     = fmt.Sprintf("%s:%s@tcp(db:3306)/%s?parseTime=true", dbUser, dbPassword, dbDatabase)
 )
 
